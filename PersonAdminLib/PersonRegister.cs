@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace PersonAdminLib
 {
-    internal class PersonRegister
+    public class PersonRegister
     {
+        private List<Person> personList;
+        public PersonRegister this[int i]
+        {
+            get { personList != null? return pers[i]; : return -1 }
+            
+        }
     }
 }

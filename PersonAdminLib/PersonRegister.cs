@@ -8,11 +8,15 @@ namespace PersonAdminLib
 {
     public class PersonRegister
     {
-        private List<Person> personList;
-        public PersonRegister this[int i]
+        public List<Person> personList = new List<Person>();
+        public Person this[int i]
         {
-            get { personList != null? return pers[i]; : return -1 }
+            get { return personList[i]; }
             
+        }
+        public int Count
+        {
+            get { return personList.Count; }
         }
     }
 }

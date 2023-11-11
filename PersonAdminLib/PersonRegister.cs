@@ -18,5 +18,20 @@ namespace PersonAdminLib
         {
             get { return personList.Count; }
         }
+
+        public int ReadPersonsFromFile(string filename)
+        {
+            int count = 0;
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            while ((line = file.ReadLine()) != null)
+            {
+                string[] words = line.Split('\t');
+                personList.Add(new Person(words[0], words[1]));
+                count++;
+            }
+            file.Close();
+            return count;
+        }
     }
 }

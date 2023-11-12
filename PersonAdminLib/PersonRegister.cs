@@ -5,11 +5,26 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonAdminLib
-{
+namespace PersonAdminLib 
+{ 
     public class PersonRegister
     {
-        public List<Person> personList = new List<Person>();
+        private List<Person> personList = new List<Person>();
+
+        public delegate void PersonAddedHandler(object source, PersonEventArgs args);
+        public event PersonAddedHandler PersonAddedEvent;
+
+        public PersonRegister()
+        {
+            InitPersons();
+        }
+        private void InitPersons()
+        {
+            this.Add(new Person("James", "Dean"));
+            this.Add(new Person("Sean", "Connery"));
+            this.Add(new Person("Jeremey", "Black"));
+            this.Add(new Person("Andy", "Warhol"));
+        }
 
         public List<Person> Persons {
             get { return personList; } 
@@ -24,8 +39,28 @@ namespace PersonAdminLib
         {
             get { return personList.Count; }
         }
+        public int Add(Person newPerson)
+        {
+            if(newPerson == null)
+            {
+                return personList.Count;
+            }
+            personList.Add(newPerson);
+            PersonAddedEvent?.Invoke(this, new PersonEventArgs(newPerson));
+            return personList.Count;
+        }
+
+        public Person FindPerson(string surname)
+        {
+            foreach (var p in personList) if (p.Surname == surname.Trim()) return p;
+            return null;
+        }
 
 
+        public Person? FindPerson(Predicate<Person> match)
+        {
+            return personList.Find(match);
+        }
         public void Sort(Comparison<Person> comparer)
         {
             personList.Sort(comparer);
@@ -38,7 +73,7 @@ namespace PersonAdminLib
             while ((line = file.ReadLine()) != null)
             {
                 string[] words = line.Split('\t');
-                personList.Add(new Person(words[0], words[1]));
+                this.Add(new Person(words[0], words[1]));
                 count++;
             }
             file.Close();

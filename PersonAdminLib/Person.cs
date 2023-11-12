@@ -16,5 +16,14 @@ namespace PersonAdminLib
             Firstname = firstname;
             Surname = surname;
         }
+        public static int CompareFirstname(Person me, Person other)
+        {
+            return me.Firstname.CompareTo(other.Firstname);
+        }
+
+        public static int CompareSurname(Person me, Person other)
+        {
+            return me.Surname.CompareTo(other.Surname);
+        }
     }
 }

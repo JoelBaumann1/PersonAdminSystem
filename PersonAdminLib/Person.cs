@@ -20,6 +20,10 @@ namespace PersonAdminLib
         {
             return me.Firstname.CompareTo(other.Firstname);
         }
+        public override string ToString()
+        {
+            return $"{Firstname} {Surname}";
+        }
 
         public static int CompareSurname(Person me, Person other)
         {

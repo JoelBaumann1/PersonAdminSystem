@@ -30,6 +30,10 @@ namespace PersonAdminLib
             get { return personList; } 
         }
 
+        public IEnumerable<string?> GetPersons() {
+            return personList.GetItemsAsString(); 
+        }
+
         public Person this[int i]
         {
             get { return personList[i]; }

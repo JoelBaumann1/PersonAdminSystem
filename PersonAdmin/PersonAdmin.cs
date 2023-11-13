@@ -33,7 +33,12 @@ namespace PersonAdmin
             Person p = personRegister.FindPerson(ContainsFirstAndLast);
 
             Console.WriteLine($"found: {searchChar} in {p.Surname} {p.Firstname}");
-
+            Console.WriteLine(global::System.Environment.NewLine );
+            var gotpersons = personRegister.GetPersons();
+            foreach(var person in gotpersons )
+            {
+                Console.WriteLine(person.ToString());
+            }
 
         }
 
